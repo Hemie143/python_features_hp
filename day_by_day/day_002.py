@@ -12,6 +12,7 @@ class HogwartsMember:
         self.birthyear = birthyear
         self.sex = sex
 
+    # instance method
     def says(self, words):
         return f'{self._name} says {words}'
 
@@ -74,33 +75,16 @@ class Pupil(HogwartsMember):
     def harry(cls):
         return cls('Harry James Potter', 1980, 'male', 'Gryffindor', start_year=1991, pet('Hedwig', 'owl'))
 
-    @classmethod
-    def ron(cls):
-        return cls('Ronald Bilius Weasley', 1980, 'male', 'Gryffindor', start_year=1991, pet('Pigwidgeon', 'owl'))
-
-    @classmethod
-    def hermione(cls):
-        return cls('Hermione Granger', 1979, 'female', 'Gryffindor', start_year=1991, pet('Crookkshanks', 'cat'))
-
-
-
 class Professor(HogwartsMember):
-    """
-    Creates a Hogwarts professor
-    """
+  """
+  Creates a Hogwarts professor
+  """
 
     def __init__(self, name, birthyear, sex, subject, house=None):
         super().__init__(name, birthyear, sex)
         self.subject = subject
         self.house = house
 
-    @classmethod
-    def mcgonagall(cls):
-        return cls('Minerva McGonagall', 1935, 'female', 'Transfiguration', house='Gryffindor')
-
-    @classmethod
-    def snape(cls):
-        return cls('Severus Snape', 1960, 'male', 'Potions', house='Slytherin')
 
 class Ghost(HogwartsMember):
     """
@@ -117,6 +101,10 @@ class Ghost(HogwartsMember):
 
 if __name__ == "__main__":
     hagrid = HogwartsMember('Rubeus Hagrid', '1928', 'male')
+    print(hagrid.says('Hello!'))
+    print(hagrid.location)
+    print(HogwartsMember.location)
+
     harry = Pupil(name='Harry James Potter',
                   birthyear=1980,
                   sex='male',
@@ -125,10 +113,3 @@ if __name__ == "__main__":
                   pet=('Hedwig', 'owl')
                   )
 
-    headmaster = harry.school_headmaster()
-
-    mcgonagall = Professor.mcgonagall()
-    snape = Professor.snape()
-    harry = Pupil.harry()
-    ron = Pupil.ron()
-    hermione = Pupil.hermione()
