@@ -12,6 +12,9 @@ class HogwartsMember:
         self.birthyear = birthyear
         self.sex = sex
 
+    def __repr__(self):
+        return f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear})'
+
     # instance method
     def says(self, words):
         return f'{self._name} says {words}'
@@ -49,6 +52,9 @@ class Pupil(HogwartsMember):
             'Transfiguration': False,
         }
 
+    def __repr__(self):
+        return(f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear}, house: {self.house})')
+
     @staticmethod
     def passed(grade):
         """
@@ -85,6 +91,13 @@ class Professor(HogwartsMember):
         self.subject = subject
         self.house = house
 
+    def __repr__(self):
+        return(f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear}, subject: {self.subject})')
+
+    @classmethod
+    def mcgonagall(cls):
+        return cls('Minerva McGonagall', 1935, 'female', 'Transfiguration', house='Gryffindor')
+
 
 class Ghost(HogwartsMember):
     """
@@ -98,18 +111,15 @@ class Ghost(HogwartsMember):
         if house is not None:
             self.house = house
 
+    def __repr__(self):
+        return(f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear}, '
+               f'year of death: {self.year_of_death})')
+
 
 if __name__ == "__main__":
     hagrid = HogwartsMember('Rubeus Hagrid', 1928, 'male')
-    print(hagrid.says('Hello!'))
-    print(hagrid.location)
-    print(HogwartsMember.location)
-
-    harry = Pupil(name='Harry James Potter',
-                  birthyear=1980,
-                  sex='male',
-                  house='Gryffindor',
-                  start_year=1991,
-                  pet=('Hedwig', 'owl')
-                  )
-
+    print(hagrid)
+    mcgonagall = Professor.mcgonagall()
+    print(mcgonagall)
+    harry = Pupil.harry()
+    print(harry)
