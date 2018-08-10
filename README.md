@@ -16,6 +16,7 @@ References:
 | 4 | To-string print, ```__repr__``` |
 | 5 | Decorators |
 | 6 | Properties, getter and setter |
+| 7 | Underscore patterns |
 
 
 
