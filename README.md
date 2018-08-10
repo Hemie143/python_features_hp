@@ -14,7 +14,8 @@ References:
 | 2 | Class methods, instance methods, static methods, using class methods as alternative constructors   |
 | 3 | Function annotations |
 | 4 | To-string print, ```__repr__``` |
-
+| 5 | Decorators |
+| 6 | Properties, getter and setter |
 
 
 
