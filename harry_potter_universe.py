@@ -13,8 +13,15 @@ class HogwartsMember:
         self.birthyear = birthyear
         self.sex = sex
 
+    def __repr__(self):
+        return f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear})'
+
     def says(self, words):
         return f'{self._name} says {words}'
+
+    @property
+    def name(self):
+        return self._name
 
     @property
     def age(self):
@@ -32,7 +39,7 @@ class Pupil(HogwartsMember):
     """
 
     def __init__(self, name: str, birthyear: int, sex: str, house: str, start_year: int, pet: tuple = None):
-        super().__init__(name, birthyear, sex)
+        super(Pupil, self).__init__(name, birthyear, sex)
         self.house = house
         self.start_year = start_year
 
@@ -53,6 +60,11 @@ class Pupil(HogwartsMember):
             'Potions': False,
             'Transfiguration': False,
         }
+
+        self._friends = []
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear}, house: {self.house})'
 
     @staticmethod
     def passed(grade):
@@ -75,9 +87,25 @@ class Pupil(HogwartsMember):
         }
         return grades.get(grade, False)
 
+    def befriend(self, person):
+        """ Adds another person to your list of friends """
+        if person.__class__.__name__ != 'HogwartsMember' and self.house != 'Slytherin' and person.house == 'Slytherin':
+            print("Are you sure you want to be friends with someone from Slytherin?")
+        self._friends.append(person)
+        print(f"{person.name} is now your friend!")
+
+    @property
+    def current_year(self):
+        now = datetime.datetime.now().year
+        return (now - self.start_year) + 1
+
     @property
     def owls(self):
         return self._owls
+
+    @property
+    def friends(self):
+        return f"{self._name}'s current friends are {[person.name for person in self._friends]}"
 
     @owls.setter
     def owls(self, subject_and_grade):
@@ -87,10 +115,10 @@ class Pupil(HogwartsMember):
         except ValueError:
             raise ValueError('Pass an iterable with two items: subject and grade')
         passed = self.passed(grade)
-        if passed:
-            self._owls[subject] = True
-        else:
+        if not passed:
             print('The exam was not passed so now OWL was awarded!')
+
+        self._owls[subject] = True
 
     @owls.deleter
     def owls(self):
@@ -111,6 +139,9 @@ class Pupil(HogwartsMember):
     def hermione(cls):
         return cls('Hermione Granger', 1979, 'female', 'Gryffindor', start_year=1991, pet=('Crookkshanks', 'cat'))
 
+    @classmethod
+    def malfoy(cls):
+        return cls('Draco Lucius Malfoy', 1980, 'male', 'Slytherin', start_year=1991, pet=('Unnamed', 'owl'))
 
 
 class Professor(HogwartsMember):
@@ -119,9 +150,13 @@ class Professor(HogwartsMember):
     """
 
     def __init__(self, name: str, birthyear: int, sex: str, subject: str, house: tuple = None):
-        super().__init__(name, birthyear, sex)
+        super(Professor, self).__init__(name, birthyear, sex)
         self.subject = subject
-        self.house = house
+        if house is not None:
+            self.house = house
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear}, subject: {self.subject})'
 
     @classmethod
     def mcgonagall(cls):
@@ -137,14 +172,45 @@ class Ghost(HogwartsMember):
     """
 
     def __init__(self, name: str, birthyear: int, sex: str, year_of_death: int, house: tuple = None):
-        super().__init__(name, birthyear, sex)
+        super(Ghost, self).__init__(name, birthyear, sex)
         self.year_of_death = year_of_death
 
         if house is not None:
             self.house = house
 
+    def __repr__(self):
+        return f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear}, ' \
+               f'year of death: {self.year_of_death})'
+
+    @classmethod
+    def nearly_headless_nick(cls):
+        return cls('Sir Nicholas de Mimsy-Porpington', 1401, 'male', 1492, 'Gryffindor')
+
+
+class Charm:
+    """ Creates a charm """
+    def __init__(self, incantation, difficulty=None, effect=None):
+        self.incantation = incantation
+        self.difficulty = difficulty
+        self.effect = effect
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}({self.incantation}, {self.difficulty}, {self.effect})'
+
+    def cast(self):
+        print(f"{self.incantation}!")
+
+    @classmethod
+    def lumos(cls):
+        return cls('Lumos', 'simple', 'Illuminates the wand tip')
+
+    @classmethod
+    def wingardium_leviosa(cls):
+        return cls('Wingardium Leviosa', 'simple', 'Makes objects fly')
+
 
 if __name__ == "__main__":
+    now = 1995
     hagrid = HogwartsMember('Rubeus Hagrid', 1928, 'male')
     harry = Pupil(name='Harry James Potter',
                   birthyear=1980,
@@ -153,11 +219,14 @@ if __name__ == "__main__":
                   start_year=1991,
                   pet=('Hedwig', 'owl')
                   )
-
-    headmaster = harry.school_headmaster()
-
-    mcgonagall = Professor.mcgonagall()
-    snape = Professor.snape()
-    harry = Pupil.harry()
     ron = Pupil.ron()
-    hermione = Pupil.hermione()
+    malfoy = Pupil.malfoy()
+
+    harry.befriend(hagrid)
+    harry.befriend(ron)
+    harry.befriend(malfoy)
+    print(harry.friends)
+    print()
+
+    lumos = Charm.lumos()
+    lumos.cast()
