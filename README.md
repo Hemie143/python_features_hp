@@ -18,6 +18,7 @@ References:
 | 6 | Properties, getter and setter |
 | 7 | Underscore patterns |
 | 8 | New methods and classes |
+| 9 | Duck Typing and EAFP |
 
 
 

@@ -12,6 +12,7 @@ class HogwartsMember:
         self._name = name
         self.birthyear = birthyear
         self.sex = sex
+        self._traits = {}
 
     def __repr__(self):
         return f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear})'
@@ -164,94 +165,12 @@ class Pupil(HogwartsMember):
         return cls('Draco Lucius Malfoy', 1980, 'male', 'Slytherin', start_year=1991, pet=('Unnamed', 'owl'))
 
 
-class Professor(HogwartsMember):
-    """
-    Creates a Hogwarts professor
-    """
+hagrid = HogwartsMember(name='Rubeus Hagrid', birthyear=1928, sex='male')
+hagrid.add_trait("kind")
+hagrid.add_trait("monster-loving")
+hagrid.add_trait("impatient", value=False)
 
-    def __init__(self, name: str, birthyear: int, sex: str, subject: str, house: tuple = None):
-        super(Professor, self).__init__(name, birthyear, sex)
-        self.subject = subject
-        if house is not None:
-            self.house = house
-
-    def __repr__(self):
-        return f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear}, subject: {self.subject})'
-
-    @classmethod
-    def mcgonagall(cls):
-        return cls('Minerva McGonagall', 1935, 'female', 'Transfiguration', house='Gryffindor')
-
-    @classmethod
-    def snape(cls):
-        return cls('Severus Snape', 1960, 'male', 'Potions', house='Slytherin')
-
-class Ghost(HogwartsMember):
-    """
-    Creates a Hogwarts ghost
-    """
-
-    def __init__(self, name: str, birthyear: int, sex: str, year_of_death: int, house: tuple = None):
-        super(Ghost, self).__init__(name, birthyear, sex)
-        self.year_of_death = year_of_death
-
-        if house is not None:
-            self.house = house
-
-    def __repr__(self):
-        return f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear}, ' \
-               f'year of death: {self.year_of_death})'
-
-    @classmethod
-    def nearly_headless_nick(cls):
-        return cls('Sir Nicholas de Mimsy-Porpington', 1401, 'male', 1492, 'Gryffindor')
-
-
-class Charm:
-    """ Creates a charm """
-    def __init__(self, incantation: str, difficulty: str= None, effect: str = None):
-        self.incantation = incantation
-        self.difficulty = difficulty
-        self.effect = effect
-
-    def __repr__(self):
-        return f'{self.__class__.__name__}({self.incantation}, {self.difficulty}, {self.effect})'
-
-    def cast(self):
-        print(f"{self.incantation}!")
-
-    @classmethod
-    def lumos(cls):
-        return cls('Lumos', 'simple', 'Illuminates the wand tip')
-
-    @classmethod
-    def wingardium_leviosa(cls):
-        return cls('Wingardium Leviosa', 'simple', 'Makes objects fly')
-
-
-if __name__ == "__main__":
-    now = 1995
-    hagrid = HogwartsMember('Rubeus Hagrid', 1928, 'male')
-    hagrid = HogwartsMember(name='Rubeus Hagrid', birthyear=1928, sex='male')
-    hagrid.add_trait("kind")
-    hagrid.add_trait("monster-loving")
-    hagrid.add_trait("impatient", value=False)
-
-    harry = Pupil(name='Harry James Potter',
-                  birthyear=1980,
-                  sex='male',
-                  house='Gryffindor',
-                  start_year=1991,
-                  pet=('Hedwig', 'owl')
-                  )
-    ron = Pupil.ron()
-    malfoy = Pupil.malfoy()
-
-    harry.befriend(hagrid)
-    harry.befriend(ron)
-    harry.befriend(malfoy)
-    print(harry.friends)
-    print()
-
-    lumos = Charm.lumos()
-    lumos.cast()
+hagrid.print_traits()
+hagrid.exhibits_trait("kind")
+hagrid.exhibits_trait("impatient")
+hagrid.exhibits_trait("bearded")
