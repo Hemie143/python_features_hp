@@ -1,4 +1,6 @@
 import datetime
+from typing import NamedTuple
+
 
 class HogwartsMember:
     """
@@ -12,6 +14,7 @@ class HogwartsMember:
         self._name = name
         self.birthyear = birthyear
         self.sex = sex
+        self._traits = {}
 
     def __repr__(self):
         return f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear})'
@@ -207,6 +210,19 @@ class Ghost(HogwartsMember):
         return cls('Sir Nicholas de Mimsy-Porpington', 1401, 'male', 1492, 'Gryffindor')
 
 
+class DeathEater(NamedTuple):
+    name: str
+    birthyear: int
+
+    @ property
+    def leader(self):
+        voldemort = DeathEater('Voldemort', 1926)
+        return voldemort
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.name}, birthyear: {self.birthyear})"
+
+
 class Charm:
     """ Creates a charm """
     def __init__(self, incantation: str, difficulty: str= None, effect: str = None):
@@ -255,3 +271,10 @@ if __name__ == "__main__":
 
     lumos = Charm.lumos()
     lumos.cast()
+
+    lucius = DeathEater('Lucius Malfoy', 1953)
+    print('Lucius: ', lucius)
+    print('Leader: ', lucius.leader)
+
+    bellatrix = DeathEater('Bellatrix Lestrange', 1951)
+    print('bellatrix: ', bellatrix)
