@@ -19,6 +19,8 @@ References:
 | 7 | Underscore patterns |
 | 8 | New methods and classes |
 | 9 | Duck Typing and EAFP |
+| 10 | namedtuple and NamedTuple |
+| 11 | New class |
 
 
 
