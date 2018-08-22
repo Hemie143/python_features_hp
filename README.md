@@ -1,4 +1,4 @@
-# Python features explained using Harry Potter
+# Python features explained using a Magic Universe
 
 With this repository, I'm just following Anna-Lena Popkes' blog related to Python features. 
 
@@ -22,5 +22,6 @@ References:
 | 10 | namedtuple and NamedTuple |
 | 11 | New class |
 | 12 | Abstract Base class |
+| 13 | abc module and @abstractmethod |
 
 
