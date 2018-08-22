@@ -23,5 +23,7 @@ References:
 | 11 | New class |
 | 12 | Abstract Base class |
 | 13 | abc module and @abstractmethod |
+| 14 | Abstract Class |
+
 
 
