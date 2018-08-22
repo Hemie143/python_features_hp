@@ -2,9 +2,9 @@ import datetime
 from typing import NamedTuple
 
 
-class HogwartsMember:
+class CastleKilmereMember:
     """
-    Creates a member of the Hogwarts School of Witchcraft and Wizardy
+    Creates a member of the Castle Kilmere School of Magic
     """
 
     # class attribute
@@ -53,12 +53,12 @@ class HogwartsMember:
 
     @staticmethod
     def school_headmaster():
-        return HogwartsMember('Albus Percival Wulfric Brian Dumbledore', 1881, sex='male')
+        return CastleKilmereMember('Albus Percival Wulfric Brian Dumbledore', 1881, sex='male')
 
 
-class Pupil(HogwartsMember):
+class Pupil(CastleKilmereMember):
     """
-    Creates a Hogwarts Pupil
+    Creates a Castle Kilmere Pupil
     """
 
     def __init__(self, name: str, birthyear: int, sex: str, house: str, start_year: int, pet: tuple = None):
@@ -69,7 +69,7 @@ class Pupil(HogwartsMember):
         if pet is not None:
             self.pet_name, self.pet_type = pet
 
-        self._owls = {
+        self._elms = {
             'Study of Ancient Runes': False,
             'Arithmancy': False,
             'Astronomy': False,
@@ -112,7 +112,7 @@ class Pupil(HogwartsMember):
 
     def befriend(self, person):
         """ Adds another person to your list of friends """
-        if person.__class__.__name__ != 'HogwartsMember' and self.house != 'Slytherin' and person.house == 'Slytherin':
+        if person.__class__.__name__ != 'CastleKilmereMember' and self.house != 'Slytherin' and person.house == 'Slytherin':
             print("Are you sure you want to be friends with someone from Slytherin?")
         self._friends.append(person)
         print(f"{person.name} is now your friend!")
@@ -124,7 +124,7 @@ class Pupil(HogwartsMember):
 
     @property
     def owls(self):
-        return self._owls
+        return self._elms
 
     @property
     def friends(self):
@@ -139,7 +139,7 @@ class Pupil(HogwartsMember):
             raise ValueError('Pass an iterable with two items: subject and grade')
         passed = self.passed(grade)
         if passed:
-            self._owls[subject] = True
+            self._elms[subject] = True
         else:
             print('The exam was not passed so now OWL was awarded!')
 
@@ -147,7 +147,7 @@ class Pupil(HogwartsMember):
     def owls(self):
         print("Caution, you are deleting this student's OWL's! "
               "You should only do that if she/he dropped out of school without passing any exam!")
-        del self._owls
+        del self._elms
 
     # Factory function
     @classmethod
@@ -167,7 +167,7 @@ class Pupil(HogwartsMember):
         return cls('Draco Lucius Malfoy', 1980, 'male', 'Slytherin', start_year=1991, pet=('Unnamed', 'owl'))
 
 
-class Professor(HogwartsMember):
+class Professor(CastleKilmereMember):
     """
     Creates a Hogwarts professor
     """
@@ -189,7 +189,7 @@ class Professor(HogwartsMember):
     def snape(cls):
         return cls('Severus Snape', 1960, 'male', 'Potions', house='Slytherin')
 
-class Ghost(HogwartsMember):
+class Ghost(CastleKilmereMember):
     """
     Creates a Hogwarts ghost
     """
@@ -247,8 +247,8 @@ class Charm:
 
 if __name__ == "__main__":
     now = 1995
-    hagrid = HogwartsMember('Rubeus Hagrid', 1928, 'male')
-    hagrid = HogwartsMember(name='Rubeus Hagrid', birthyear=1928, sex='male')
+    hagrid = CastleKilmereMember('Rubeus Hagrid', 1928, 'male')
+    hagrid = CastleKilmereMember(name='Rubeus Hagrid', birthyear=1928, sex='male')
     hagrid.add_trait("kind")
     hagrid.add_trait("monster-loving")
     hagrid.add_trait("impatient", value=False)

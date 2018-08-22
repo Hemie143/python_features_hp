@@ -110,7 +110,7 @@ class Pupil(HogwartsMember):
 
     def befriend(self, person):
         """ Adds another person to your list of friends """
-        if person.__class__.__name__ != 'HogwartsMember' and self.house != 'Slytherin' and person.house == 'Slytherin':
+        if person.__class__.__name__ != 'CastleKilmereMember' and self.house != 'Slytherin' and person.house == 'Slytherin':
             print("Are you sure you want to be friends with someone from Slytherin?")
         self._friends.append(person)
         print(f"{person.name} is now your friend!")
