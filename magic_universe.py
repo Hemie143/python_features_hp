@@ -1,4 +1,6 @@
 import datetime
+
+from dataclasses import dataclass
 from typing import NamedTuple
 
 
@@ -325,37 +327,51 @@ class Charm:
     def wingardium_leviosa(cls):
         return cls('Wingardium Leviosa', 'simple', 'Makes objects fly')
 
+@dataclass(order=True)
+class House:
+    name: str
+    traits: list
+    head: Professor
+    ghost: Ghost
+    founded_in: int = 991
+
+    def current_age(self):
+        now = datetime.datetime.now().year
+        return (now - self.founded_in) + 1
+
 
 if __name__ == "__main__":
-    now = 1995
-    hagrid = CastleKilmereMember('Rubeus Hagrid', 1928, 'male')
-    hagrid = CastleKilmereMember(name='Rubeus Hagrid', birthyear=1928, sex='male')
-    hagrid.add_trait("kind")
-    hagrid.add_trait("monster-loving")
-    hagrid.add_trait("impatient", value=False)
+    mocking_knight = Ghost.mocking_knight()
+    gray_groom = Ghost.gray_groom()
+    scary_scoundrel = Ghost.scary_scoundrel()
+    old_lady = Ghost.old_lady()
 
-    harry = Pupil(name='Harry James Potter',
-                  birthyear=1980,
-                  sex='male',
-                  house='Gryffindor',
-                  start_year=1991,
-                  pet=('Hedwig', 'owl')
-                  )
-    flynn = Pupil.flynn()
-    adrien = Pupil.adrien()
+    mirren = Professor.mirren()
+    briddle = Professor.briddle()
+    blade = Professor.blade()
+    radford = Professor.radford()
+    print('Age of Professor Radford: ', radford.age)
 
-    harry.befriend(hagrid)
-    harry.befriend(flynn)
-    harry.befriend(adrien)
-    print(harry.friends)
-    print()
+    house_of_courage = House('House of Courage',
+                       ['bravery', 'nerve', 'courage'],
+                       mirren,
+                       mocking_knight)
+    print('house_of_courage: ', house_of_courage)
 
-    lumos = Charm.lumos()
-    lumos.cast()
+    house_of_loyalty = House('House of Loyalty',
+                       ['loyalty', 'fairness', 'patience', 'kindness'],
+                       briddle,
+                       gray_groom)
+    print('house_of_loyalty: ', house_of_loyalty)
 
-    lucius = DarkArmyMember('Lucius Malfoy', 1953)
-    print('Lucius: ', lucius)
-    print('Leader: ', lucius.leader)
+    house_of_ambition = House('House of Ambition',
+                      ['cunning', 'ambition', 'determination'],
+                      blade,
+                      scary_scoundrel)
+    print('house_of_ambition: ', house_of_ambition)
 
-    bellatrix = DarkArmyMember('Bellatrix Lestrange', 1951)
-    print('bellatrix: ', bellatrix)
+    house_of_wisdom = House('House of Wisdom',
+                      ['intelligence', 'wit', 'wisdom'],
+                      radford,
+                      old_lady)
+    print('house_of_wisdom: ', house_of_wisdom)

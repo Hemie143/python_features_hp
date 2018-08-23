@@ -26,6 +26,8 @@ References:
 | 14 | Abstract Class |
 | 15 | New methods |
 | 16 | Data classes intro |
+| 17 | Data classes, default values and adding methods |
+| 18 | @dataclass with parameters |
 
 
 
