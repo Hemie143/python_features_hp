@@ -24,6 +24,9 @@ References:
 | 12 | Abstract Base class |
 | 13 | abc module and @abstractmethod |
 | 14 | Abstract Class |
+| 15 | New methods |
+| 16 | Data classes intro |
+
 
 
 
