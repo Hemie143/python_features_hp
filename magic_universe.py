@@ -290,12 +290,10 @@ class Ghost(CastleKilmereMember):
         return cls("The Boneless Bard", 1211, 'male', 1288, 'House of Creativity')
 
 
-class DarkArmyMember(NamedTuple):
+@dataclass(frozen=True)
+class DarkArmyMember:
     name: str
     birthyear: int
-
-    def __repr__(self):
-        return f"{self.__class__.__name__}({self.name}, birthyear: {self.birthyear})"
 
     @ property
     def leader(self):

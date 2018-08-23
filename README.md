@@ -28,7 +28,4 @@ References:
 | 16 | Data classes intro |
 | 17 | Data classes, default values and adding methods |
 | 18 | @dataclass with parameters |
-
-
-
-
+| 19 | Immutable data classes |
