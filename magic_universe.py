@@ -1,7 +1,6 @@
 import datetime
 
 from dataclasses import dataclass
-from typing import NamedTuple
 
 
 class CastleKilmereMember:
@@ -30,12 +29,24 @@ class CastleKilmereMember:
         now = datetime.datetime.now().year
         return now - self.birthyear
 
+    def whisper(function):
+        def wrapper(*args):
+            original_output = function(*args)
+            # We split the output in two parts, to replace "says" by "whispers"
+            first_part, words = original_output.split(' says: ')
+            # We need to remove exclamation marks when whispering
+            words = words.replace('!', '.')
+            new_output = f"{first_part} whispers: {words}"
+            return new_output
+        return wrapper
+
     @staticmethod
     def school_headmaster():
         return CastleKilmereMember('Redmond Dalodore', 1939, sex='male')
 
+    @whisper
     def says(self, words):
-        return f'{self._name} says {words}'
+        return f'{self._name} says: {words}'
 
     def add_trait(self, trait, value=True):
         self._traits[trait] = value
@@ -373,3 +384,7 @@ if __name__ == "__main__":
                       radford,
                       old_lady)
     print('house_of_wisdom: ', house_of_wisdom)
+
+    aurora = Pupil.aurora()
+    print(aurora.says("Be careful Quintus!"))
+
