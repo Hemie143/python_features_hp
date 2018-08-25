@@ -33,3 +33,4 @@ References:
 | 21 | if __name__ == "__main__" |
 | 22 | context manager: with |
 | 23 | Own context manager |
+| 24 | Letter class |

@@ -68,6 +68,10 @@ class CastleKilmereMember:
         else:
             print(f"No, {self._name} is not {trait}!")
 
+    def write_letter(self, recipient, content):
+        letter_name = f"dear_{recipient}.txt"
+        with Letter(letter_name) as l:
+            l.write(content)
 
 
 class Pupil(CastleKilmereMember):
@@ -349,42 +353,25 @@ class House:
         return (now - self.founded_in) + 1
 
 
+class Letter:
+    total_number_of_letters = 0
+
+    def __init__(self, letter_name):
+        self.letter_name = letter_name
+        self.__class__.total_number_of_letters += 1
+
+    def __enter__(self):
+        self.letter = open(self.letter_name, 'w')
+        return self.letter
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if self.letter:
+            self.letter.close()
+
+
 if __name__ == "__main__":
-    mocking_knight = Ghost.mocking_knight()
-    gray_groom = Ghost.gray_groom()
-    scary_scoundrel = Ghost.scary_scoundrel()
-    old_lady = Ghost.old_lady()
+    cleon = Pupil.cleon()
+    letter_content = "Hi Bromley! \nCan Flynn, Cassidy and I stop by for a tea this afternoon? \nCleon"
+    cleon.write_letter('Bromley', letter_content)
 
-    mirren = Professor.mirren()
-    briddle = Professor.briddle()
-    blade = Professor.blade()
-    radford = Professor.radford()
-    print('Age of Professor Radford: ', radford.age)
-
-    house_of_courage = House('House of Courage',
-                       ['bravery', 'nerve', 'courage'],
-                       mirren,
-                       mocking_knight)
-    print('house_of_courage: ', house_of_courage)
-
-    house_of_loyalty = House('House of Loyalty',
-                       ['loyalty', 'fairness', 'patience', 'kindness'],
-                       briddle,
-                       gray_groom)
-    print('house_of_loyalty: ', house_of_loyalty)
-
-    house_of_ambition = House('House of Ambition',
-                      ['cunning', 'ambition', 'determination'],
-                      blade,
-                      scary_scoundrel)
-    print('house_of_ambition: ', house_of_ambition)
-
-    house_of_wisdom = House('House of Wisdom',
-                      ['intelligence', 'wit', 'wisdom'],
-                      radford,
-                      old_lady)
-    print('house_of_wisdom: ', house_of_wisdom)
-
-    aurora = Pupil.aurora()
-    print(aurora.says("Be careful Quintus!"))
-
+    print(f"Total number of letter created so far: {Letter.total_number_of_letters}")
