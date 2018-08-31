@@ -1,5 +1,4 @@
 import pytest
-
 from python_features_hp.magic_universe import CastleKilmereMember
 
 def say_words(person, words):
@@ -33,3 +32,4 @@ def test_exhibit_traits():
     assert bromley.exhibits_trait('kind') is True
     assert bromley.exhibits_trait('mean') is False
     assert bromley.exhibits_trait('smart') is None
+
