@@ -35,3 +35,4 @@ References:
 | 23 | Own context manager |
 | 24 | Letter class |
 | 25 | pytest intro |
+| 26 | pytest fixtures |
