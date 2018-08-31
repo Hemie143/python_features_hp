@@ -38,3 +38,15 @@ def test_exhibit_traits(bromley_with_traits):
     assert bromley_with_traits.exhibits_trait('kind') is True
     assert bromley_with_traits.exhibits_trait('mean') is False
     assert bromley_with_traits.exhibits_trait('smart') is None
+
+
+def test_print_traits(capfd, bromley_with_traits):
+    bromley_with_traits.print_traits()
+    stdout, err = capfd.readouterr()
+    stdout = stdout.strip()
+    assert stdout == 'Bromley Huckabee is kind, tidy-minded but not mean'
+
+
+def test_init_raises_exception_with_missing_arguments():
+    with pytest.raises(TypeError):
+        bromley = CastleKilmereMember()
