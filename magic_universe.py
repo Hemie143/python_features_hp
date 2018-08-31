@@ -67,6 +67,7 @@ class CastleKilmereMember:
             print(f"Yes, {self._name} is {trait}")
         else:
             print(f"No, {self._name} is not {trait}!")
+        return value
 
     def write_letter(self, recipient, content):
         letter_name = f"dear_{recipient}.txt"
