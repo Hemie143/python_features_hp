@@ -370,9 +370,25 @@ class Letter:
             self.letter.close()
 
 
-if __name__ == "__main__":
-    cleon = Pupil.cleon()
-    letter_content = "Hi Bromley! \nCan Flynn, Cassidy and I stop by for a tea this afternoon? \nCleon"
-    cleon.write_letter('Bromley', letter_content)
+class Potion:
+    """ Creates a potion """
+    def __init__(self, ingredients):
+        self.ingredients = ingredients
+        self.counter = -1
 
-    print(f"Total number of letter created so far: {Letter.total_number_of_letters}")
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.counter += 1
+        if self.counter == len(self.ingredients):
+            raise StopIteration
+        return self.ingredients[self.counter]
+
+
+if __name__ == "__main__":
+    flask_of_remembrance = Potion(['raven eggshells', 'tincture of thyme', 'unicorn tears', 'dried onions',
+                                   'powdered ginger root'])
+
+    for ingredient in flask_of_remembrance:
+        print(ingredient)
