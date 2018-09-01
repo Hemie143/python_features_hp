@@ -16,4 +16,3 @@ for component in item:
 # for ingredient in potion:
 #       print(ingredient)
 
-# __iter__:
