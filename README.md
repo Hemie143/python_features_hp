@@ -42,3 +42,4 @@ References:
 | 30 | for loop: BTS |
 | 31 | Potion class |
 | 32 | pytest with Professor class |
+| 33 | pytest with Ghost class |
