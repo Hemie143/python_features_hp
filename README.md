@@ -41,3 +41,4 @@ References:
 | 29 | Iterators |
 | 30 | for loop: BTS |
 | 31 | Potion class |
+| 32 | pytest with Professor class |
