@@ -46,3 +46,4 @@ References:
 | 34 | collections.Counter |
 | 35 | pytest with DarkArmyMember class |
 | 36 | pytest with Potion class |
+| 37 | More Spell child classes |
