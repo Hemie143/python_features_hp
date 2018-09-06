@@ -3,6 +3,9 @@ import datetime
 from python_features_hp.magic_universe import Pupil, Charm, Transfiguration, Hex, Curse, Jinx, HealingSpell, \
     CounterSpell
 
+from python_features_hp.error import TraitDoesNotExistError
+
+
 now = datetime.datetime.now().year
 
 
@@ -207,10 +210,8 @@ def test_learn_spell_hex_if_being_in_house_of_ambition(capfd, adrien, rectaro):
 
 
 def test_learn_spell_if_being_too_young(capfd, cleon, liberula):
-    cleon.learn_spell(liberula)
-    stdout, err = capfd.readouterr()
-    stdout = stdout.strip()
-    assert stdout == "Cleon Bery does not have a character trait with the name 'highly intelligent'\nCleon Bery is too young to study this spell!"
+    with pytest.raises(TraitDoesNotExistError):
+        cleon.learn_spell(liberula)
 
 
 def test_learn_spell_hex_if_being_too_young_but_highly_intelligent(capfd, cassidy, liberula):

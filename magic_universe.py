@@ -1,4 +1,5 @@
 import datetime
+import python_features_hp.error as error
 
 from abc import ABCMeta, abstractmethod
 from dataclasses import dataclass
@@ -14,6 +15,8 @@ class CastleKilmereMember:
 
     def __init__(self, name: str, birthyear: int, sex: str):
         self._name = name
+        if type(birthyear) is not int:
+            raise error.InvalidBirthyearError("The birthyear is not a valid integer. Try something like 1991")
         self.birthyear = birthyear
         self.sex = sex
         self._traits = {}
@@ -62,7 +65,7 @@ class CastleKilmereMember:
         try:
             value = self._traits[trait]
         except KeyError:
-            print(f"{self._name} does not have a character trait with the name '{trait}'")
+            raise error.TraitDoesNotExistError(f"{self._name} does not have a character trait with the name '{trait}'")
             return
         if value:
             print(f"Yes, {self._name} is {trait}!")

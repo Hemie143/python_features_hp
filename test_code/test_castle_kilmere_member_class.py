@@ -1,6 +1,6 @@
 import pytest
 from python_features_hp.magic_universe import CastleKilmereMember
-
+from python_features_hp.error import TraitDoesNotExistError
 
 @pytest.fixture()
 def bromley():
@@ -37,7 +37,8 @@ def test_add_negative_trait(bromley):
 def test_exhibit_traits(bromley_with_traits):
     assert bromley_with_traits.exhibits_trait('kind') is True
     assert bromley_with_traits.exhibits_trait('mean') is False
-    assert bromley_with_traits.exhibits_trait('smart') is None
+    with pytest.raises(TraitDoesNotExistError):
+        bromley_with_traits.exhibits_trait('smart')
 
 
 def test_print_traits(capfd, bromley_with_traits):
