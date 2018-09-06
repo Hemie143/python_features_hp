@@ -47,3 +47,5 @@ References:
 | 35 | pytest with DarkArmyMember class |
 | 36 | pytest with Potion class |
 | 37 | More Spell child classes |
+| 38 | pytest with Spell class |
+| 39 | pytest with Spell class |

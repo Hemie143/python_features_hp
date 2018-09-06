@@ -38,7 +38,7 @@ class Charm(Spell):
         return("Alteration of the object's inherent qualities, that is, its behaviour and capabilities")
 
     def cast(self):
-        print(f"{self.incantation}!")
+        return(f"{self.incantation}!")
 
     @classmethod
     def stuporus_ratiato(cls):
@@ -60,7 +60,7 @@ class Transfiguration(Spell):
         return("Alteration of the object's form or appearance")
 
     def cast(self):
-        print(f"{self.incantation}!")
+        return(f"{self.incantation}!")
 
     @classmethod
     def alterator_canieo(cls):
@@ -79,7 +79,7 @@ class Jinx(Spell):
                "inconvenience to the target")
 
     def cast(self):
-        print(f"{self.incantation}!")
+        return(f"{self.incantation}!")
 
     @classmethod
     def inceptotis(cls):
@@ -97,7 +97,7 @@ class Hex(Spell):
         return("Medium dark magic - Affects an object in a negative manner. Major inconvenience to the target.")
 
     def cast(self):
-        print(f"{self.incantation}!")
+        return(f"{self.incantation}!")
 
     @classmethod
     def rectaro(cls):
@@ -115,7 +115,7 @@ class Curse(Spell):
         return("Worst kind of dark magic - Intended to affect an object in a strongly negative manner.")
 
     def cast(self):
-        print(f"{self.incantation}!")
+        return(f"{self.incantation}!")
 
     @classmethod
     def fiera_satanotis(cls):
@@ -133,7 +133,7 @@ class CounterSpell(Spell):
         return("Inhibits the effects of another spell")
 
     def cast(self):
-        print(f"{self.incantation}!")
+        return(f"{self.incantation}!")
 
     @classmethod
     def mufindo_immolim(cls):
@@ -152,7 +152,7 @@ class HealingSpell(Spell):
         return("Improves the condition of a living object")
 
     def cast(self):
-        print(f"{self.incantation}!")
+        return(f"{self.incantation}!")
 
     @classmethod
     def porim_perfite(cls):
