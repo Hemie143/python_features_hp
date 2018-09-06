@@ -44,3 +44,4 @@ References:
 | 32 | pytest with Professor class |
 | 33 | pytest with Ghost class |
 | 34 | collections.Counter |
+| 35 | pytest with DarkArmyMember class |

@@ -1,5 +1,6 @@
 import datetime
 
+from abc import ABCMeta, abstractmethod
 from dataclasses import dataclass
 
 
@@ -316,30 +317,51 @@ class DarkArmyMember:
         lord_odon = DarkArmyMember('Lord Odon', 1971)
         return lord_odon
 
-    def cast(self, spell):
-        print(f"{self.name}: {spell.incantation}!")
+    def cast_spell(self, spell):
+        return(f"{self.name}: {spell.incantation}!")
 
 
-class Charm:
+class Spell(metaclass=ABCMeta):
     """ Creates a charm """
-    def __init__(self, incantation: str, difficulty: str= None, effect: str = None):
+    def __init__(self, name: str, incantation: str, effect: str):
+        self.name = name
         self.incantation = incantation
-        self.difficulty = difficulty
         self.effect = effect
 
     def __repr__(self):
+        return (f"{self.__class__.__name__}({self.name}, "
+               f"incantation: '{self.incantation}', effect: {self.effect})")
+
+    @abstractmethod
+    def cast(self):
+        pass
+
+    @property
+    @abstractmethod
+    def defining_feature(self):
+        pass
+
+
+class Charm(Spell):
+
+    def __init__(self, name: str, incantation: str, effect: str, difficulty: str = None, min_year: int = None):
+        super(Charm, self).__init__(name, incantation, effect)
+        self.difficulty = difficulty
+        self.min_year = min_year
+
+    def __repr__(self):
         return f'{self.__class__.__name__}({self.incantation}, {self.difficulty}, {self.effect})'
+
+    @property
+    def defining_feature(self):
+        return("Alteration of the object's inherent qualities, that is, its behaviour and capabilities")
 
     def cast(self):
         print(f"{self.incantation}!")
 
     @classmethod
-    def lumos(cls):
-        return cls('Lumos', 'simple', 'Illuminates the wand tip')
-
-    @classmethod
-    def wingardium_leviosa(cls):
-        return cls('Wingardium Leviosa', 'simple', 'Makes objects fly')
+    def stuporus_ratiato(cls):
+        return cls('Stuporus Ratiato', 'Stuporus Ratiato', 'Makes objects fly', 'simple', 1)
 
 @dataclass(order=True)
 class House:
@@ -392,3 +414,7 @@ if __name__ == "__main__":
 
     for ingredient in flask_of_remembrance:
         print(ingredient)
+
+    keres_fulford = DarkArmyMember("Keres Fulford", 1953)
+    stuporus_ratiato = Charm.stuporus_ratiato()
+    keres_fulford.cast_spell(stuporus_ratiato)  # == "Keres Fulford: Stuporus Ratiato!"
