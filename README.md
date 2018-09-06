@@ -45,3 +45,4 @@ References:
 | 33 | pytest with Ghost class |
 | 34 | collections.Counter |
 | 35 | pytest with DarkArmyMember class |
+| 36 | pytest with Potion class |
