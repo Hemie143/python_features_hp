@@ -65,7 +65,7 @@ class CastleKilmereMember:
             print(f"{self._name} does not have a character trait with the name '{trait}'")
             return
         if value:
-            print(f"Yes, {self._name} is {trait}")
+            print(f"Yes, {self._name} is {trait}!")
         else:
             print(f"No, {self._name} is not {trait}!")
         return value
@@ -116,18 +116,16 @@ class Pupil(CastleKilmereMember):
         Given a grade, determine if an exam was passed.
         """
         grades = {
-            'O': True,
-            'Ordinary': True,
-            'P': True,
-            'Passed': True,
+            'E': True,
+            'Exceptional': True,
+            'G': True,
+            'Good': True,
             'A': True,
             'Acceptable': True,
             'P': False,
             'Poor': False,
-            'D': False,
+            'H': False,
             'Horrible': False,
-            'T': False,
-            'Troll': False,
         }
         return grades.get(grade, False)
 
@@ -148,10 +146,10 @@ class Pupil(CastleKilmereMember):
             if self.current_year >= spell.min_year:
                 print(f"{self._name} now knows spell {spell.name}")
                 self.known_spells.add(spell)
-            elif self.exhibits_traits('highly intelligent'):
+            elif self.exhibits_trait('highly intelligent'):
                 print(f"{self._name} now knows spell {spell.name}")
                 self.known_spells.add(spell)
-            if self.current_year < spell.min_year:
+            elif self.current_year < spell.min_year:
                 print(f"{self._name} is too young to study this spell!")
         elif spell.__class__.__name__ in ['Hex', 'Curse']:
             # Only House of Ambition would study hexes and curses
@@ -169,11 +167,11 @@ class Pupil(CastleKilmereMember):
             print(f"This is dark magic - stay away from performing curses!")
         elif spell.__class__.__name__ == 'Hex':
             if self.house == 'House of Ambition':
-                print(f"{self._name}: {spell.incantation}!")
+                return(f"{self._name}: {spell.incantation}!")
             else:
                 print(f"You shouldn't cast a hex, that's mean!")
         elif spell in self.known_spells:
-            print(f"{self._name}: {spell.incantation}!")
+            return(f"{self._name}: {spell.incantation}!")
         elif spell.name not in self.known_spells:
             print(f"You can't cast the {spell.name} spell correctly - you have to study it first! ")
 
@@ -188,7 +186,7 @@ class Pupil(CastleKilmereMember):
 
     @property
     def friends(self):
-        return f"{self._name}'s current friends are {[person.name for person in self._friends]}"
+        return f"{self._name}'s current friends are: {[person.name for person in self._friends]}"
 
     @elms.setter
     def elms(self, subject_and_grade):
@@ -201,7 +199,7 @@ class Pupil(CastleKilmereMember):
         if passed:
             self._elms[subject] = True
         else:
-            print('The exam was not passed so now ELM was awarded!')
+            print('The exam was not passed so no ELM was awarded!')
 
     @elms.deleter
     def elms(self):

@@ -49,3 +49,6 @@ References:
 | 37 | More Spell child classes |
 | 38 | pytest with Spell class |
 | 39 | pytest with Spell class |
+| 40 | pytest with Pupil class |
+| 41 | pytest with Pupil class |
+| 42 | pytest with Pupil class |
