@@ -1,4 +1,5 @@
 import datetime
+import functools
 import python_features_hp.error as error
 
 from abc import ABCMeta, abstractmethod
@@ -34,7 +35,9 @@ class CastleKilmereMember:
         return now - self.birthyear
 
     def whisper(function):
+        @functools.wraps(function)
         def wrapper(*args):
+            ''' Whispering decorator '''
             original_output = function(*args)
             # We split the output in two parts, to replace "says" by "whispers"
             first_part, words = original_output.split(' says: ')
@@ -50,6 +53,7 @@ class CastleKilmereMember:
 
     @whisper
     def says(self, words):
+        '''Allows a Castle Kilmere Member to talk'''
         return f'{self._name} says: {words}'
 
     def add_trait(self, trait, value=True):
@@ -544,3 +548,7 @@ if __name__ == "__main__":
 
     counter_spell = CounterSpell.mufindo_immolim()
     print(counter_spell.cast())
+
+    bromley = CastleKilmereMember('Bromley Huckabee', 1959, 'male')
+    print(bromley.says.__name__)
+    print(bromley.says.__doc__)

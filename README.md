@@ -52,3 +52,7 @@ References:
 | 40 | pytest with Pupil class |
 | 41 | pytest with Pupil class |
 | 42 | pytest with Pupil class |
+| 43 | Custom exception class |
+| 44 | Custom exception class |
+| 45 | Custom exception class |
+| 46 | functools.wraps - Keep metadata with decorators |
