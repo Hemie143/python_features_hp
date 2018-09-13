@@ -4,7 +4,7 @@ import python_features_hp.error as error
 
 from abc import ABCMeta, abstractmethod
 from dataclasses import dataclass
-
+from collections import defaultdict
 
 class CastleKilmereMember:
     """
@@ -20,7 +20,7 @@ class CastleKilmereMember:
             raise error.InvalidBirthyearError("The birthyear is not a valid integer. Try something like 1991")
         self.birthyear = birthyear
         self.sex = sex
-        self._traits = {}
+        self._traits = defaultdict(lambda: False)
 
     def __repr__(self):
         return f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear})'
@@ -66,11 +66,7 @@ class CastleKilmereMember:
         print(f"{self._name} is {', '.join(true_traits)} but not {', '.join(false_traits)}")
 
     def exhibits_trait(self, trait):
-        try:
-            value = self._traits[trait]
-        except KeyError:
-            raise error.TraitDoesNotExistError(f"{self._name} does not have a character trait with the name '{trait}'")
-            return
+        value = self._traits[trait]
         if value:
             print(f"Yes, {self._name} is {trait}!")
         else:
@@ -528,27 +524,10 @@ class Potion:
 
 
 if __name__ == "__main__":
-    charm = Charm.liberula()
-    print('charm: ', charm)
-
-    transfiguration = Transfiguration.alterator_canieo()
-    print(transfiguration.cast())
-
-    jinx = Jinx.inceptotis()
-    print('jinx: ', jinx)
-
-    hex_ = Hex.rectaro()
-    print(hex_.cast())
-
-    curse = Curse.fiera_satanotis()
-    print('curse: ', curse)
-
-    healing_spell = HealingSpell.porim_perfite()
-    print(healing_spell.cast())
-
-    counter_spell = CounterSpell.mufindo_immolim()
-    print(counter_spell.cast())
-
     bromley = CastleKilmereMember('Bromley Huckabee', 1959, 'male')
-    print(bromley.says.__name__)
-    print(bromley.says.__doc__)
+
+    bromley.add_trait('tidy-minded')
+    bromley.add_trait('kind')
+
+    bromley.exhibits_trait('kind')
+    bromley.exhibits_trait('mean')

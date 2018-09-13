@@ -14,7 +14,7 @@ class CastleKilmereMember:
             raise error.InvalidBirthyearError("The birthyear is not a valid integer. Try something like 1991")
         self.birthyear = birthyear
         self.sex = sex
-        self._traits = {}
+        self._traits = defaultdict(lambda: False)
 
     def __repr__(self):
         return f'{self.__class__.__name__}({self._name}, birthyear: {self.birthyear})'
@@ -33,23 +33,12 @@ class CastleKilmereMember:
         print(f"{self._name} is {', '.join(true_traits)} but not {', '.join(false_traits)}")
 
     def exhibits_trait(self, trait):
-        try:
-            value = self._traits[trait]
-        except KeyError:
-            # raise error.TraitDoesNotExistError(f"{self._name} does not have a character trait with the name '{trait}'")
-            print(f"{self._name} does not have a character trait with the name '{trait}'")
-            return
+        value = self._traits[trait]
         if value:
             print(f"Yes, {self._name} is {trait}!")
         else:
             print(f"No, {self._name} is not {trait}!")
         return value
-
-def return_false():
-    return False
-
-dict_ = defaultdict(return_false)       # expects a callable
-# dict_ = defaultdict(lambda: False)
 
 
 if __name__ == "__main__":
